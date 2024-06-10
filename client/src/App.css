@@ -33,3 +33,22 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-container {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 auto; /* Set sidebar to be inflexible */
+  height: 100vh;
+  width: 8%; /* Set the width of the sidebar */
+  background-image: url("./assets/grass-court-background.jpg");
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  flex-grow: 1; /* Let content area grow to fill remaining space */
+}
+

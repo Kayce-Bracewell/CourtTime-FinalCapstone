@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
+import "./NavBarNew.css"
 
 export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
     return (
         <div className="navbar">
             <div className="nav-item">
                 <Link to="/">
-                    <label>🎾Court Time</label>
+                    🎾Court Time
                 </Link>
             </div>
             {loggedInUser ? (
                 <>
                     <div className="nav-item">
                         <Link to="/courtlist">
-                            <label>Courts</label>
+                            Courts
                         </Link>
                     </div>
                     <div className="nav-item">
-                        <button
+                        <button className="smaller-btn"
                             onClick={() => {
                                 logout().then(() => {
                                     setLoggedInUser(null);
@@ -30,7 +31,7 @@ export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
             ) : (
                 <div className="nav-item">
                     <Link to="/login">
-                        <button>Login</button>
+                        <button className="smaller-btn">Login</button>
                     </Link>
                 </div>
             )}
