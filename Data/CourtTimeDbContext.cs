@@ -49,6 +49,8 @@ public class CourtTimeDbContext : IdentityDbContext<IdentityUser>
             IdentityUserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
             FirstName = "Kayce",
             LastName = "Bracewell",
+            Address = "4468 Temple Rd.",
+            Email = "kayceb@gmail.com",
             Skill = 4.0,
             PhoneNum = "(621)789-3733"
         });

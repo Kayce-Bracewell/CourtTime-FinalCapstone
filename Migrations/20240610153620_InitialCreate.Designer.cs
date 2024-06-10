@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourtTime_Capstone.Migrations
 {
     [DbContext(typeof(CourtTimeDbContext))]
-    [Migration("20240610140956_InitialCreate")]
+    [Migration("20240610153620_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -208,6 +208,14 @@ namespace CourtTime_Capstone.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -239,6 +247,8 @@ namespace CourtTime_Capstone.Migrations
                         new
                         {
                             Id = 1,
+                            Address = "4468 Temple Rd.",
+                            Email = "kayceb@gmail.com",
                             FirstName = "Kayce",
                             IdentityUserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             LastName = "Bracewell",
@@ -374,13 +384,13 @@ namespace CourtTime_Capstone.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1fc9a66-c5dd-4dab-82e1-8db4579d8db9",
+                            ConcurrencyStamp = "6ab1eebf-eba8-4aa2-b079-303451d391a0",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOP+tKSuTPJmdy71s3UfgUix5piCzv12uGd/lMDj9fz0xoRPwyJRWrcxa3FKM67T5A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELguwh5SXRZ9ldCmK3cKhkhNhamLu7EpIOjTk3cp1f9W/wAJ9LE0bW0T2O0T5nzmHQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "39cc2b02-025a-43a6-9243-898bda29d09e",
+                            SecurityStamp = "f3b85032-4eb1-49a1-bfeb-8a50f264a516",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

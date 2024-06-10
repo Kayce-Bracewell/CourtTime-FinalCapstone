@@ -184,6 +184,8 @@ namespace CourtTime_Capstone.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
                     Image = table.Column<string>(type: "text", nullable: true),
                     Skill = table.Column<double>(type: "double precision", nullable: false),
                     PhoneNum = table.Column<string>(type: "text", nullable: true),
@@ -242,7 +244,7 @@ namespace CourtTime_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "d1fc9a66-c5dd-4dab-82e1-8db4579d8db9", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAEOP+tKSuTPJmdy71s3UfgUix5piCzv12uGd/lMDj9fz0xoRPwyJRWrcxa3FKM67T5A==", null, false, "39cc2b02-025a-43a6-9243-898bda29d09e", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "6ab1eebf-eba8-4aa2-b079-303451d391a0", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAELguwh5SXRZ9ldCmK3cKhkhNhamLu7EpIOjTk3cp1f9W/wAJ9LE0bW0T2O0T5nzmHQ==", null, false, "f3b85032-4eb1-49a1-bfeb-8a50f264a516", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "Courts",
@@ -270,8 +272,8 @@ namespace CourtTime_Capstone.Migrations
 
             migrationBuilder.InsertData(
                 table: "UserProfiles",
-                columns: new[] { "Id", "FirstName", "IdentityUserId", "Image", "LastName", "PhoneNum", "Skill" },
-                values: new object[] { 1, "Kayce", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", null, "Bracewell", "(621)789-3733", 4.0 });
+                columns: new[] { "Id", "Address", "Email", "FirstName", "IdentityUserId", "Image", "LastName", "PhoneNum", "Skill" },
+                values: new object[] { 1, "4468 Temple Rd.", "kayceb@gmail.com", "Kayce", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", null, "Bracewell", "(621)789-3733", 4.0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
