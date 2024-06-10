@@ -1,0 +1,6 @@
+@CourtTime_Capstone_HostAddress = http://localhost:5124
+
+GET {{CourtTime_Capstone_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
