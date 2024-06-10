@@ -3,8 +3,9 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { tryGetLoggedInUser } from "./managers/authManager";
 import { Spinner } from "reactstrap";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import ApplicationViews from "./components/ApplicationViews";
+import { NavBar } from "./components/NavBarNew";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState();
