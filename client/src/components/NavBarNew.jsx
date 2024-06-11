@@ -12,21 +12,19 @@ export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
             {loggedInUser ? (
                 <>
                     <div className="nav-item">
-                        <Link to="/courtlist">
+                        <Link to="/courts">
                             Courts
                         </Link>
                     </div>
-                    <div className="nav-item">
-                        <button className="smaller-btn"
-                            onClick={() => {
-                                logout().then(() => {
-                                    setLoggedInUser(null);
-                                });
-                            }}
-                        >
-                            Logout
-                        </button>
-                    </div>
+                    <button className="nav-item"
+                        onClick={() => {
+                            logout().then(() => {
+                                setLoggedInUser(null);
+                            });
+                        }}
+                    >
+                        Logout
+                    </button>
                 </>
             ) : (
                 <div className="nav-item">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getCourts } from "../../managers/courtManager"
+import { Link } from "react-router-dom"
 import "./CourtList.css"
 
 export const CourtList = () => {
@@ -15,8 +16,10 @@ export const CourtList = () => {
             <div className="court-container">
                 {courts.map((c) => (
                     <div key={c.id} className="court-item">
-                        <img src={c.image} alt={`image of ${c.name}`}/>
-                        <h4>{c.name}</h4>
+                        <Link to={`${c.id}`} className="link-unstyled">
+                            <img src={c.image} alt={`image of ${c.name}`}/>
+                            <h4>{c.name}</h4>
+                        </Link>
                     </div>
                 ))}
             </div>

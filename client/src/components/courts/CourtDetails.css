@@ -1,0 +1,68 @@
+#court-container {
+    background-color: #FD9B63;
+    margin: 3%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#court-name {
+    font-style: italic;
+    font-weight: 550;
+    align-self: center;
+}
+
+#image-matches-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#scheduled-matches {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #81A263;
+    width: 50%;
+    height: 200px;
+}
+
+#court-info {
+    display: flex;
+    flex-direction: row;
+    border: 3px solid white;
+    justify-content: space-between;
+    align-items: stretch; /* Ensure all children have the same height */
+    height: 70px; /* Set an explicit height */
+}
+
+
+.info-item {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid white;
+    box-sizing: border-box;
+    height: 100%;
+    width: 33%;
+}
+
+.info-item:last-child {
+    border-right: none;
+}
+
+.info-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#schedule-btn {
+    width: 25%;
+    align-self: center;
+    margin: 10px 0;
+    background-color: #2faeed;
+    border: 1px solid white;
+}
