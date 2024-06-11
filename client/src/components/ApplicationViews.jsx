@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { Home } from "../Home";
 import { CourtList } from "./courts/CourtList";
+import { CourtDetails } from "./courts/CourtDetails";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -17,7 +18,10 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-        <Route path="courtlist" element={<CourtList />}/>
+        <Route path="courts">
+          <Route index element={<CourtList />} />
+          <Route path=":id" element={<CourtDetails />} />
+        </Route>
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

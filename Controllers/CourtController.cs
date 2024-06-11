@@ -35,4 +35,27 @@ public class CourtController : ControllerBase
 
         return Ok(courtDTOs);
     }
+
+    [HttpGet("{id}")]
+    public IActionResult GetCourtById(int id)
+    {
+        Court court = _dbContext.Courts.FirstOrDefault(c => c.Id == id);
+
+        if (court == null)
+        {
+            return NotFound();
+        }
+
+        CourtDTO courtDTO = new CourtDTO
+        {
+            Id = court.Id,
+            Name = court.Name,
+            Address = court.Address,
+            Image = court.Image,
+            CourtSize = court.CourtSize,
+            Type = court.Type
+        };
+
+        return Ok(courtDTO);
+    }
 };

@@ -32,4 +32,13 @@
     margin-top: 10px;
 }
 
+.link-unstyled {
+    color: inherit;
+    text-decoration: none;
+}
+
+.link-unstyled:hover {
+    color: #ff0000; /* Change color on hover */
+    text-decoration: underline; /* Underline on hover */
+}
 
