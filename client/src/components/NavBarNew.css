@@ -17,6 +17,10 @@
     align-self: flex-start;
 }
 
+.nav-item:last-child {
+    align-self: flex-end;
+}
+
 .smaller-btn {
     font-size: inherit;
     padding: 3px 7px;

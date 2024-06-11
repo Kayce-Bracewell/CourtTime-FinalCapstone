@@ -108,6 +108,10 @@ public class AuthController : ControllerBase
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
                 IdentityUserId = identityUserId,
+                Address = profile.Address,
+                Image = profile.Image,
+                Skill = profile.Skill,
+                PhoneNum = profile.PhoneNum,
                 UserName = User.FindFirstValue(ClaimTypes.Name),
                 Email = User.FindFirstValue(ClaimTypes.Email),
                 Roles = roles
@@ -138,8 +142,12 @@ public class AuthController : ControllerBase
             {
                 FirstName = registration.FirstName,
                 LastName = registration.LastName,
+                Address = registration.Address,
+                Email = registration.Email,
+                Skill = 2.5,
                 IdentityUserId = user.Id,
             });
+            
             _dbContext.SaveChanges();
 
             var claims = new List<Claim>
@@ -159,4 +167,5 @@ public class AuthController : ControllerBase
         }
         return StatusCode(500);
     }
+
 }
