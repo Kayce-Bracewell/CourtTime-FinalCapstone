@@ -10,7 +10,7 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    margin-top: 20px; /* Adds space between the heading and the court items */
+    margin-top: 20px;
 }
 
 .court-item {
@@ -23,8 +23,9 @@
 }
 
 .court-item img {
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 200px;
+    border: 1px solid white;
     border-radius: 5px;
 }
 

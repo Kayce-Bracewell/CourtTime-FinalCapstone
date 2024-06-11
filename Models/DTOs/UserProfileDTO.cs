@@ -10,6 +10,12 @@ public class UserProfileDTO
     public string LastName { get; set; }
     public string Address { get; set; }
     public string Email { get; set; }
+    
+    public string Image {get; set;}
+
+    public double? Skill {get; set;}
+
+    public string PhoneNum {get; set;}
 
     public string UserName { get; set; }
     public List<string> Roles { get; set; }

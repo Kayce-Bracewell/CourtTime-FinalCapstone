@@ -31,7 +31,7 @@ export const CourtDetails = () => {
             <div id="image-matches-container">
                 <img src={court.image} alt={`image for ${court.name}`}/>
                 <div id="scheduled-matches">
-                    <p>Matches Container</p>
+                    <p id="match-header">Matches Container</p>
                 </div>
             </div>
             <button id="schedule-btn">Schedule A Match!</button>

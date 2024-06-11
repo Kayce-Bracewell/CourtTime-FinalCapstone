@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import { Home } from "../Home";
 import { CourtList } from "./courts/CourtList";
 import { CourtDetails } from "./courts/CourtDetails";
+import { ProfileView } from "./prof/ProfileView";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -22,6 +23,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <Route index element={<CourtList />} />
           <Route path=":id" element={<CourtDetails />} />
         </Route>
+        <Route path="profile" element={<ProfileView loggedInUser={loggedInUser}/>}/>
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

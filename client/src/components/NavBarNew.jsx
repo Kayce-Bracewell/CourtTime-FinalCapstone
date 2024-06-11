@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./NavBarNew.css"
+import { logout } from "../managers/authManager";
 
 export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
     return (
@@ -14,6 +15,16 @@ export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
                     <div className="nav-item">
                         <Link to="/courts">
                             Courts
+                        </Link>
+                    </div>
+                    <div className="nav-item">
+                        <Link to="/profile">
+                            Profile
+                        </Link>
+                    </div>
+                    <div className="nav-item">
+                        <Link to="/">
+                            Upcoming Matches
                         </Link>
                     </div>
                     <button className="nav-item"

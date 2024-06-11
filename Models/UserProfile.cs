@@ -17,7 +17,7 @@ public class UserProfile
 
     public string? Image {get; set;}
 
-    public double Skill {get; set;}
+    public double? Skill {get; set;}
 
     public string? PhoneNum {get; set;}
 
