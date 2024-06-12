@@ -23,7 +23,7 @@ export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
                         </Link>
                     </div>
                     <div className="nav-item">
-                        <Link to="/">
+                        <Link to="/matches">
                             Upcoming Matches
                         </Link>
                     </div>

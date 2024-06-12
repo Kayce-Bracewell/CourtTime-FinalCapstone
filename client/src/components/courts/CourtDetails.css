@@ -4,12 +4,14 @@
     display: flex;
     flex-direction: column;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 3px solid white;
 }
 
 #court-name {
     font-style: italic;
     font-weight: 550;
     align-self: center;
+    margin: 15px 0;
 }
 
 #image-matches-container {
@@ -73,4 +75,36 @@
     width: 100%;
     text-align: center;
     margin: 3% 0;
+}
+
+.schedule-inputs {
+    display: flex;
+    justify-content: center;
+}
+
+#last-schedule-input {
+    margin: 15px 0;
+}
+
+#schedule-container {
+    background-color: #81A263;
+    padding: 15px 0;
+    width: 50%;
+    align-self: center;
+}
+
+.info-label {
+    margin-right: 15px;
+}
+
+#create-match-btn {
+    align-self: center;
+    margin: 15px 0;
+    background-color: #2faeed;
+    border: 1px solid white;
+}
+
+.input-black {
+    background-color: black;
+    color: white;
 }

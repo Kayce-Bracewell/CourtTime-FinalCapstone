@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getCourtById } from "../../managers/courtManager"
 import "./CourtDetails.css"
 
-export const CourtDetails = () => {
+export const CourtDetails = ({ loggedInUser }) => {
     const [court, setCourt] = useState({})
     const { id } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         getCourtById(id).then(setCourt)
@@ -34,7 +35,9 @@ export const CourtDetails = () => {
                     <p id="match-header">Matches Container</p>
                 </div>
             </div>
-            <button id="schedule-btn">Schedule A Match!</button>
+            <button id="schedule-btn" onClick={() => {
+                navigate("schedule")
+            }}>Schedule A Match!</button>
         </div>
     )
 }
