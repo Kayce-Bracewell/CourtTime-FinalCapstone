@@ -1,6 +1,7 @@
 using CourtTime.Data;
 using CourtTime.Models;
 using CourtTime.Models.DTOs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourtTime.Controllers;
@@ -16,45 +17,84 @@ public class MatchController : ControllerBase
         _dbContext = context;
     }
 
-    // [HttpGet("matches/{id}")]
-    // public async Task<IActionResult> GetMatch(int id)
-    // {
-    //     var match = await _dbContext.Matches.FindAsync(id);
-    //     if (match == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //     return Ok(match);
-    // }
-
-    // [HttpPost("matches")]
-    // public IActionResult MakeMatch(MatchDTO matchDTO)
-    // {
-    //     Match newMatch = new Match
-    //     {
-    //         MatchLeaderId = matchDTO.MatchLeaderId,
-    //         MatchOpponentId = matchDTO.MatchOpponentId,
-    //         CourtId = matchDTO.CourtId,
-    //         ScheduledTime = matchDTO.ScheduledTime
-    //     };
-
-    //     _dbContext.Matches.Add(newMatch);
-    //     _dbContext.SaveChanges();
-
-    //     return Ok();
-    // }
-
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetMatch(int id)
+    public IActionResult GetMatch(int id)
     {
-        var match = await _dbContext.Matches.FindAsync(id);
+        Match match = _dbContext.Matches
+            .Include(m => m.Court)
+            .Include(m => m.MatchOpponent)
+            .FirstOrDefault(m => m.Id == id);
+
         if (match == null)
         {
             return NotFound();
         }
 
-        return Ok(match);
+        MatchDTO matchDTO = new MatchDTO
+        {
+            Id = match.Id,
+            MatchLeaderId = match.MatchLeaderId,
+            MatchOpponentId = match.MatchOpponentId,
+            CourtId = match.CourtId,
+            ScheduledTime = match.ScheduledTime,
+            Court = new CourtDTO
+            {
+                Id = match.Court.Id,
+                Name = match.Court.Name,
+                Address = match.Court.Address,
+                Image = match.Court.Image,
+                CourtSize = match.Court.CourtSize,
+                Type = match.Court.Type
+            },
+            MatchOpponent = new UserProfileDTO
+            {
+                Id = match.MatchOpponent.Id,
+                FirstName = match.MatchOpponent.FirstName,
+                LastName = match.MatchOpponent.LastName,
+                Email = match.MatchOpponent.Email,
+                Skill = match.MatchOpponent.Skill,
+                PhoneNum = match.MatchOpponent.PhoneNum
+            }
+        };
+
+        return Ok(matchDTO);
+    }
+
+    [HttpGet("user/{userId}")]
+    public IActionResult GetUserMatches(int userId)
+    {
+        List<MatchDTO> matches = _dbContext.Matches
+            .Include(m => m.Court)
+            .Include(m => m.MatchOpponent)
+            .Where(m => m.MatchLeaderId == userId || m.MatchOpponentId == userId)
+            .Select(m => new MatchDTO
+            {
+                Id = m.Id,
+                MatchLeaderId = m.MatchLeaderId,
+                MatchOpponentId = m.MatchOpponentId,
+                CourtId = m.CourtId,
+                ScheduledTime = m.ScheduledTime,
+                Court = new CourtDTO
+                {
+                    Id = m.Court.Id,
+                    Name = m.Court.Name,
+                    Address = m.Court.Address,
+                    Image = m.Court.Image,
+                    CourtSize = m.Court.CourtSize,
+                    Type = m.Court.Type
+                },
+                MatchOpponent = new UserProfileDTO
+                {
+                    Id = m.MatchOpponent.Id,
+                    FirstName = m.MatchOpponent.FirstName,
+                    LastName = m.MatchOpponent.LastName,
+                    Email = m.MatchOpponent.Email,
+                    Skill = m.MatchOpponent.Skill,
+                    PhoneNum = m.MatchOpponent.PhoneNum
+                }
+            }).ToList();
+
+        return Ok(matches);
     }
 
     [HttpPost]

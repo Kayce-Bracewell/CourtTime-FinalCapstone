@@ -1,0 +1,101 @@
+#match-container {
+    background-color: #FD9B63;
+    border: 3px solid white;
+    height: 90%;
+    margin: 3%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#match-container h2 {
+    text-align: center;
+    margin: 15px 0;
+    text-decoration: underline;
+    text-decoration-color: #2faeed;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#detail-img {
+    width: 40%;
+    border: 2px solid white;
+    margin-right: 20px;
+    height: auto;
+}
+
+.court-info {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.court-subsection {
+    background-color: #81A263;
+    width: 50%;
+    padding: 10px;
+    border: 2px solid white;
+}
+
+.court-info h5 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.court-item-group, .match-item-group {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.court-item-group h6, .match-item-group h6 {
+    margin-right: 8px;
+}
+
+.match-details-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.match-subsection {
+    background-color: #81A263;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid white;
+}
+
+.match-subsection h5 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.match-item-group {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.match-time-section {
+    background-color: #81A263;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+}
+
+#edit-btn {
+    background-color: #2faeed;
+    border: 1px solid white;
+}
+
+#delete-btn {
+    border: 1px solid white;
+    background-color: #ed2f2f;
+}
