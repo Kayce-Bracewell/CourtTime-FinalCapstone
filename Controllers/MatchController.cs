@@ -1,5 +1,3 @@
-
-
 using CourtTime.Data;
 using CourtTime.Models;
 using CourtTime.Models.DTOs;
