@@ -15,3 +15,7 @@ export const CreateMatch = async (matchObj) => {
 export const getMatchById = (id) => {
     return fetch(`${_apiUrl}/${id}`).then(res => res.json())
 }
+
+export const getUserMatches = (userId) => {
+    return fetch(`${_apiUrl}/user/${userId}`).then(res => res.json())
+}

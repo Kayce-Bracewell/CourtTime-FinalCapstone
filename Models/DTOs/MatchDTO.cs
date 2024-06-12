@@ -13,5 +13,9 @@ namespace CourtTime.Models.DTOs;
         public int CourtId { get; set; }
 
         public string ScheduledTime { get; set; }
+
+        public CourtDTO Court {get; set;}
+
+        public UserProfileDTO MatchOpponent {get; set;}
     }
 
