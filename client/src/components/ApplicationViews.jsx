@@ -6,6 +6,9 @@ import { Home } from "../Home";
 import { CourtList } from "./courts/CourtList";
 import { CourtDetails } from "./courts/CourtDetails";
 import { ProfileView } from "./prof/ProfileView";
+import { ScheduleMatch } from "./match/ScheduleMatch";
+import { MatchList } from "./match/MatchList";
+import { MatchDetails } from "./match/MatchDetails";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -21,7 +24,16 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         />
         <Route path="courts">
           <Route index element={<CourtList />} />
-          <Route path=":id" element={<CourtDetails />} />
+          <Route path=":id">
+            <Route index element={<CourtDetails loggedInUser={loggedInUser}/>}/>
+          </Route>
+          <Route path=":id/schedule" element={<ScheduleMatch loggedInUser={loggedInUser}/>}/>
+        </Route>
+        <Route path="matches">
+          <Route index element={<MatchList loggedInUser={loggedInUser} />} />
+          <Route path=":id">
+            <Route index element={<MatchDetails /> } />
+          </Route>
         </Route>
         <Route path="profile" element={<ProfileView loggedInUser={loggedInUser}/>}/>
         <Route
