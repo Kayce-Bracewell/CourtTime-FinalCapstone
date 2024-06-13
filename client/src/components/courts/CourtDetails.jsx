@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getCourtById } from "../../managers/courtManager"
 import "./CourtDetails.css"
+import placeholderCourtImg from "../../assets/placeholder-court-real.jpg"
 
 export const CourtDetails = ({ loggedInUser }) => {
     const [court, setCourt] = useState({})
@@ -30,7 +31,8 @@ export const CourtDetails = ({ loggedInUser }) => {
                 </div>
             </div>
             <div id="image-matches-container">
-                <img src={court.image} alt={`image for ${court.name}`}/>
+                <img id="court-detail-image" src={placeholderCourtImg} />
+                {/* <img id="court-detail-image" src={court.image} alt={`image for ${court.name}`}/> */}
                 <div id="scheduled-matches">
                     <p id="match-header">Matches Container</p>
                 </div>
