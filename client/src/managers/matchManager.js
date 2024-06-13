@@ -19,3 +19,22 @@ export const getMatchById = (id) => {
 export const getUserMatches = (userId) => {
     return fetch(`${_apiUrl}/user/${userId}`).then(res => res.json())
 }
+
+export const deleteMatchById = (matchId) => {
+    return fetch(`${_apiUrl}/${matchId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+}
+
+export const editMatch = (matchObj) => {
+    return fetch(`${_apiUrl}/edit`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(matchObj)
+    })
+}

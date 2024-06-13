@@ -114,4 +114,39 @@ public class MatchController : ControllerBase
         return CreatedAtAction(nameof(GetMatch), new { id = match.Id }, match);
     }
 
+    [HttpDelete("{id}")]
+    public IActionResult DeleteMatch(int id)
+    {
+        Match match = _dbContext.Matches.FirstOrDefault(m => m.Id == id);
+
+        if(match == null)
+        {
+            return NotFound();
+        }
+
+        _dbContext.Matches.Remove(match);
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpPut("edit")]
+    public IActionResult EditMatch(MatchEditDTO matchEdit)
+    {
+        Match match = _dbContext.Matches.FirstOrDefault(m => m.Id == matchEdit.Id);
+
+        if(match == null)
+        {
+            return NotFound();
+        }
+
+        match.MatchOpponentId = matchEdit.MatchOpponentId;
+        match.CourtId = matchEdit.CourtId;
+        match.ScheduledTime = matchEdit.ScheduledTime;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
 }
