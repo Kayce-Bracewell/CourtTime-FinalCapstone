@@ -1,0 +1,40 @@
+#match-edit-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#match-edit-container {
+    background-color: #FD9B63;
+    width: 50%;
+    height: 50%;
+    border: 3px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-info {
+    margin: 15px 0;
+    display: flex;
+}
+
+.edit-info h5 {
+    margin-right: 8px;
+}
+
+.edit-info input {
+    background-color: black;
+    color: white
+}
+
+#submit-edit-btn {
+    background-color: #2faeed;
+    border: 1px solid white;
+    margin-top: 20px; /* Adjusted margin-top for spacing */
+    padding: 10px 20px; /* Added padding for button appearance */
+    align-self: center; /* Center horizontally within the container */
+}

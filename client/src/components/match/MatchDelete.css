@@ -1,0 +1,27 @@
+#delete-container {
+    background-color: #FD9B63;
+    width: 80%;
+    height: 20%;
+    border: 3px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#delete-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#delete-container h2 {
+    text-align: center;
+}
+
+#confirmation-container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace CourtTime.Models.DTOs;
 
     public class MatchDTO

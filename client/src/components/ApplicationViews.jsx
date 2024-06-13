@@ -9,6 +9,8 @@ import { ProfileView } from "./prof/ProfileView";
 import { ScheduleMatch } from "./match/ScheduleMatch";
 import { MatchList } from "./match/MatchList";
 import { MatchDetails } from "./match/MatchDetails";
+import { MatchDelete } from "./match/MatchDelete";
+import { MatchEdit } from "./match/MatchEdit";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -34,6 +36,8 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <Route path=":id">
             <Route index element={<MatchDetails /> } />
           </Route>
+          <Route path=":id/delete" element={<MatchDelete />} />
+          <Route path=":id/edit" element={<MatchEdit />} />
         </Route>
         <Route path="profile" element={<ProfileView loggedInUser={loggedInUser}/>}/>
         <Route
