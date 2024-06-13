@@ -25,8 +25,6 @@ export const ProfileView = ({ loggedInUser }) => {
     };
 
     const handleSave = () => {
-        // Save logic to post the edited profile to the database
-        // Example: saveProfile(editedProfile).then(() => setIsEditing(false));
         updateUserProfile(loggedInUser.id, editedProfile).then(() => setIsEditing(false))
         tryGetLoggedInUser().then((user) => setLoggedInUser(user))
         console.log("Saving profile...", editedProfile);

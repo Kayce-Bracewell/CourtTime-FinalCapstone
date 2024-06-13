@@ -149,4 +149,48 @@ public class MatchController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("court/{id}")]
+    public IActionResult CourtMatches(int id)
+    {
+        List<Match> matches = _dbContext.Matches
+            .Include(m => m.MatchLeader)
+            .Include(m => m.MatchOpponent)
+            .Where(m => m.CourtId == id)
+            .ToList();
+
+        if (matches == null)
+        {
+            return NotFound();
+        }
+
+        List<MatchDTO> matchDTOs = matches.Select(m => new MatchDTO
+        {
+            Id = m.Id,
+            MatchLeaderId = m.MatchLeaderId,
+            MatchOpponentId = m.MatchOpponentId,
+            CourtId = m.CourtId,
+            ScheduledTime = m.ScheduledTime,
+            MatchLeader = new UserProfileDTO
+            {
+                Id = m.MatchLeader.Id,
+                FirstName = m.MatchLeader.FirstName,
+                LastName = m.MatchLeader.LastName,
+                Address = m.MatchLeader.Address,
+                Skill = m.MatchLeader.Skill,
+                PhoneNum = m.MatchLeader.PhoneNum
+            },
+            MatchOpponent = new UserProfileDTO
+            {
+                Id = m.MatchOpponent.Id,
+                FirstName = m.MatchOpponent.FirstName,
+                LastName = m.MatchOpponent.LastName,
+                Address = m.MatchOpponent.Address,
+                Skill = m.MatchOpponent.Skill,
+                PhoneNum = m.MatchOpponent.PhoneNum
+            }
+        }).ToList();
+
+        return Ok(matchDTOs);
+    }
 }

@@ -3,14 +3,24 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getCourtById } from "../../managers/courtManager"
 import "./CourtDetails.css"
 import placeholderCourtImg from "../../assets/placeholder-court-real.jpg"
+import { getMatchesByCourtId } from "../../managers/matchManager"
 
 export const CourtDetails = ({ loggedInUser }) => {
     const [court, setCourt] = useState({})
+    const [courtMatches, setCourtMatches] = useState(null)
     const { id } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
         getCourtById(id).then(setCourt)
+        getMatchesByCourtId(id)
+            .then(matches => {
+                if(matches.length === 0) {
+                    setCourtMatches(null);
+                } else {
+                    setCourtMatches(matches)
+                }
+            })
     }, [])
 
     return (
@@ -34,7 +44,20 @@ export const CourtDetails = ({ loggedInUser }) => {
                 <img id="court-detail-image" src={placeholderCourtImg} />
                 {/* <img id="court-detail-image" src={court.image} alt={`image for ${court.name}`}/> */}
                 <div id="scheduled-matches">
-                    <p id="match-header">Matches Container</p>
+                    <p id="match-header">Scheduled Matches</p>
+                    {/* The line below will check if the court has matches.
+                    If so, it puts them in the match container, otherwise: nothing*/}
+                    {courtMatches ? 
+                    <div id="match-simple-group">
+                        {courtMatches.map(cm => (
+                            <div className="match-group-item">
+                                <p>{cm.matchLeader?.firstName + " " + cm.matchLeader?.lastName}</p>
+                                <p id="vs">VS</p>
+                                <p>{cm.matchOpponent?.firstName + " " + cm.matchOpponent?.lastName}</p>
+                                <p id="match-item-time">{cm.scheduledTime}</p>
+                            </div>
+                        ))}
+                    </div> : <></>}
                 </div>
             </div>
             <button id="schedule-btn" onClick={() => {

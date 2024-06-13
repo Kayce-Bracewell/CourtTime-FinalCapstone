@@ -39,6 +39,9 @@ namespace CourtTime.Controllers
             _dbContext.SaveChanges();
 
             // Update IdentityUser
+
+            // _dbContext.Users
+            // ^ This might be how I can find and edit the identity user properties ^
             var identityUser = await _userManager.FindByIdAsync(userProfile.IdentityUserId);
             if (identityUser != null)
             {
