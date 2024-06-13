@@ -12,8 +12,10 @@ namespace CourtTime.Models.DTOs;
 
         public string ScheduledTime { get; set; }
 
-        public CourtDTO Court {get; set;}
+        public CourtDTO? Court {get; set;}
 
-        public UserProfileDTO MatchOpponent {get; set;}
+        public UserProfileDTO? MatchLeader {get; set;}
+
+        public UserProfileDTO? MatchOpponent {get; set;}
     }
 

@@ -115,3 +115,19 @@
     width: 40%;
     height: 40%;
 }
+
+.match-group-item {
+    background-color: #FD9B63;
+    border: 1px dashed white;
+    display: flex;
+    margin: 10px 0;
+    height: 30px;
+}
+
+#vs {
+    margin: 0 10px;
+}
+
+#match-item-time {
+    margin-left: 15px;
+}

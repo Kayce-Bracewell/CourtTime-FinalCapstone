@@ -38,3 +38,7 @@ export const editMatch = (matchObj) => {
         body: JSON.stringify(matchObj)
     })
 }
+
+export const getMatchesByCourtId = (courtId) => {
+    return fetch(`${_apiUrl}/court/${courtId}`).then(res => res.json())
+}
