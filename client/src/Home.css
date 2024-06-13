@@ -1,8 +1,41 @@
-/* .pseudo-body {
-    margin: 0 7%;
-    background-color: green;
+.pseudo-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-body {
-    
-} */
+#upcoming-match-banner {
+    background-color: #81A263;
+    border: 2px solid white;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    box-shadow: 4px 4px 16px black;
+    margin: 0 auto;
+}
+
+#upcoming-match-banner:hover {
+    background-color: #FD9B63;
+    color: black;
+}
+
+#upcoming-match-banner h3 {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.pseudo-body h2 {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#upcoming-matches-container {
+    background-color: #FD9B63;
+    border: 3px solid white;
+    width: 80%;
+    margin: 20px auto;  /* Center horizontally */
+    text-align: center;  /* Center the text inside the container */
+    box-shadow: 4px 4px 16px black;
+}

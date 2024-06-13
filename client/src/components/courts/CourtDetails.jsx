@@ -50,7 +50,7 @@ export const CourtDetails = ({ loggedInUser }) => {
                     {courtMatches ? 
                     <div id="match-simple-group">
                         {courtMatches.map(cm => (
-                            <div className="match-group-item">
+                            <div key={cm.id} className="match-group-item">
                                 <p>{cm.matchLeader?.firstName + " " + cm.matchLeader?.lastName}</p>
                                 <p id="vs">VS</p>
                                 <p>{cm.matchOpponent?.firstName + " " + cm.matchOpponent?.lastName}</p>
