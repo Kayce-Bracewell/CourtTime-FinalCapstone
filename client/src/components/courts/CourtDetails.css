@@ -108,3 +108,10 @@
     background-color: black;
     color: white;
 }
+
+#court-detail-image {
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 40%;
+    height: 40%;
+}

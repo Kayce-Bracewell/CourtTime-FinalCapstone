@@ -14,7 +14,7 @@
 }
 
 .court-item {
-    border: 2px dashed #81A263;
+    border: 2px solid white;
     background-color: #FD9B63;
     margin: 10px;
     padding: 10px;
@@ -39,7 +39,7 @@
 }
 
 .link-unstyled:hover {
-    color: #ff0000; /* Change color on hover */
+    color: white; /* Change color on hover */
     text-decoration: underline; /* Underline on hover */
 }
 
