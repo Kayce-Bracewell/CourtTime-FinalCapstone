@@ -65,6 +65,7 @@ public class MatchController : ControllerBase
     {
         List<MatchDTO> matches = _dbContext.Matches
             .Include(m => m.Court)
+            .Include(m => m.MatchLeader)
             .Include(m => m.MatchOpponent)
             .Where(m => m.MatchLeaderId == userId || m.MatchOpponentId == userId)
             .Select(m => new MatchDTO
@@ -91,6 +92,15 @@ public class MatchController : ControllerBase
                     Email = m.MatchOpponent.Email,
                     Skill = m.MatchOpponent.Skill,
                     PhoneNum = m.MatchOpponent.PhoneNum
+                },
+                MatchLeader = new UserProfileDTO
+                {
+                    Id = m.MatchLeader.Id,
+                    FirstName = m.MatchLeader.FirstName,
+                    LastName = m.MatchLeader.LastName,
+                    Email = m.MatchLeader.Email,
+                    Skill = m.MatchLeader.Skill,
+                    PhoneNum = m.MatchLeader.PhoneNum
                 }
             }).ToList();
 

@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./ProfileView.css";
 import placeholderImage from "../../assets/placeholder-profile-image.jpg";
 import { updateUserProfile } from "../../managers/userManager";
-import { tryGetLoggedInUser } from "../../managers/authManager";
+import { deleteUser, tryGetLoggedInUser } from "../../managers/authManager";
+import { useNavigate } from "react-router-dom";
 
 export const ProfileView = ({ loggedInUser }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -14,6 +15,8 @@ export const ProfileView = ({ loggedInUser }) => {
         email: loggedInUser.email,
         phoneNum: loggedInUser.phoneNum
     });
+
+    const navigate = useNavigate()
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -29,6 +32,11 @@ export const ProfileView = ({ loggedInUser }) => {
         tryGetLoggedInUser().then((user) => setLoggedInUser(user))
         console.log("Saving profile...", editedProfile);
     };
+
+    const handleDelete = (userId) => {
+        deleteUser(userId)
+        navigate("/login")
+    }
 
     return (
         <div id="profile-container">
@@ -112,7 +120,11 @@ export const ProfileView = ({ loggedInUser }) => {
                 </div>
             </div>
             {isEditing ? (
-                <button id="edit-profile-btn" onClick={handleSave}>Save</button>
+                <div id="profile-btn-container">
+                    <button id="edit-profile-btn" onClick={handleSave}>Save Edit</button>
+                    <button id="delete-profile-btn" onClick={() => {
+                        handleDelete(loggedInUser.identityUserId)}}>Delete Profile</button>
+                </div>
             ) : (
                 <button id="edit-profile-btn" onClick={handleEditToggle}>Edit Profile</button>
             )}
