@@ -18,8 +18,8 @@ export const CourtList = () => {
                 {courts.map((c) => (
                     <div key={c.id} className="court-item">
                         <Link to={`${c.id}`} className="link-unstyled">
-                            <img src={placeholderCourtImg}/>
-                            {/* <img src={c.image} alt={`image of ${c.name}`}/> */}
+                            {/* <img src={placeholderCourtImg}/> */}
+                            <img src={c.image} alt={`image of ${c.name}`}/>
                             <h4>{c.name}</h4>
                         </Link>
                     </div>

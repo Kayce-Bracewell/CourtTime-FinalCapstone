@@ -3,6 +3,7 @@ using System;
 using CourtTime.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourtTime_Capstone.Migrations
 {
     [DbContext(typeof(CourtTimeDbContext))]
-    partial class CourtTimeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240617114054_AddCourtLocationUpdates")]
+    partial class AddCourtLocationUpdates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
