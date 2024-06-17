@@ -12,7 +12,8 @@ export const MatchDelete = () => {
                 <h2>Are you sure you want to delete?</h2>
                 <div id="confirmation-container">
                     <button onClick={() => {
-                        deleteMatchById(id).then(navigate("/matches"))
+                        deleteMatchById(id).then(() => {
+                            navigate("/matches")})
                     }} id="delete-btn">DELETE</button>
                     <button onClick={() => {
                         navigate(`/matches/${id}`)

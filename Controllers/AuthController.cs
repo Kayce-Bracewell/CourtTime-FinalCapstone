@@ -168,4 +168,41 @@ public class AuthController : ControllerBase
         return StatusCode(500);
     }
 
+    [HttpDelete("deleteUser/{userId}")]
+    // [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteUser(string userId)
+    {
+        try
+        {
+            // Find the user
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Find the associated UserProfile
+            var userProfile = _dbContext.UserProfiles.SingleOrDefault(up => up.IdentityUserId == user.Id);
+            if (userProfile != null)
+            {
+                _dbContext.UserProfiles.Remove(userProfile);
+            }
+
+            // Delete the user using UserManager
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                _dbContext.SaveChanges();
+                return Ok();
+            }
+            
+            return StatusCode(500, "Failed to delete user");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+
 }

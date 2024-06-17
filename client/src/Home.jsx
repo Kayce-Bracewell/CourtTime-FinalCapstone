@@ -17,15 +17,25 @@ export const Home = ({ loggedInUser }) => {
             })
     }, [loggedInUser])
 
+    const getDisplayName = (match) => {
+        const opponentName = match.matchOpponent?.firstName + " " + match.matchOpponent?.lastName;
+        const leaderName = match.matchLeader?.firstName + " " + match.matchLeader?.lastName;
+        const loggedInUserName = loggedInUser.firstName + " " + loggedInUser.lastName;
+
+        return opponentName === loggedInUserName ? leaderName : opponentName;
+    }
+
     return (
         <div className="pseudo-body">
+            {matches ? 
             <Link to="matches">
                 <div id="upcoming-match-banner">
                     <h1>!</h1>
                     <h3>You have upcoming matches</h3>
                     <h1>!</h1>
                 </div>
-            </Link>
+            </Link> : <></>
+            }
             <h2>Welcome to Court Time!</h2>
             <div id="upcoming-matches-container">
                 <h3>Scheduled Matches</h3>
@@ -37,7 +47,7 @@ export const Home = ({ loggedInUser }) => {
                         </div>
                         <div className="match-item">
                             <h4>Opponent</h4>
-                            <p>{m.matchOpponent?.firstName + " " + m.matchOpponent?.lastName}</p>
+                            <p>{getDisplayName(m)}</p>
                         </div>
                         <div className="match-item">
                             <h4>Time</h4>

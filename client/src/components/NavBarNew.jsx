@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBarNew.css"
 import { logout } from "../managers/authManager";
 
 export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="navbar">
             <div className="nav-item">
@@ -31,6 +33,7 @@ export const NavBar = ({ loggedInUser, setLoggedInUser }) => {
                         onClick={() => {
                             logout().then(() => {
                                 setLoggedInUser(null);
+                                navigate("/")
                             });
                         }}
                     >
