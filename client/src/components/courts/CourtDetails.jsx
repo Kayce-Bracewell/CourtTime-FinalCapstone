@@ -41,8 +41,8 @@ export const CourtDetails = ({ loggedInUser }) => {
                 </div>
             </div>
             <div id="image-matches-container">
-                <img id="court-detail-image" src={placeholderCourtImg} />
-                {/* <img id="court-detail-image" src={court.image} alt={`image for ${court.name}`}/> */}
+                {/* <img id="court-detail-image" src={placeholderCourtImg} /> */}
+                <img id="court-detail-image" src={court.image} alt={`image for ${court.name}`}/>
                 <div id="scheduled-matches">
                     <p id="match-header">Scheduled Matches</p>
                     {/* The line below will check if the court has matches.
