@@ -21,3 +21,5 @@ Make a plan for completing your MVP, and a second plan to accomplish your stretc
 ### Installation
 
 1) copy SSH key and open terminal. Navigate to workspace and type 'git clone <copied-ssh-key-here>'
+
+2) navigate to the project directory,
