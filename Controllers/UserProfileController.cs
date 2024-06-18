@@ -52,5 +52,23 @@ namespace CourtTime.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        public IActionResult getAllUsers()
+        {
+            List<UserProfileDTO> userProfiles = _dbContext.UserProfiles.Select(up => new UserProfileDTO
+            {
+                Id = up.Id,
+                FirstName = up.FirstName,
+                LastName = up.LastName,
+                Address = up.Address,
+                Email = up.Email,
+                Image = up.Image,
+                Skill = up.Skill,
+                PhoneNum = up.PhoneNum
+            }).ToList();
+
+            return Ok(userProfiles);
+        }
     }
 }

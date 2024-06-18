@@ -11,3 +11,7 @@ export const updateUserProfile = async (id, editedProfile) => {
 
     return response.json;
 }
+
+export const getAllUserProfiles = () => {
+    return fetch(`${_apiUrl}`).then(res => res.json())
+}
