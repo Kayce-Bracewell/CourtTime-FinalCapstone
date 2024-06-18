@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getCourtById } from "../../managers/courtManager"
 import "./CourtDetails.css"
-import placeholderCourtImg from "../../assets/placeholder-court-real.jpg"
 import { getMatchesByCourtId } from "../../managers/matchManager"
 
 export const CourtDetails = ({ loggedInUser }) => {
@@ -21,7 +20,20 @@ export const CourtDetails = ({ loggedInUser }) => {
                     setCourtMatches(matches)
                 }
             })
-    }, [])
+    }, [id])
+
+    const formatScheduledTime = (scheduledTime) => {
+        if (!scheduledTime) return ""
+
+        const date = new Date(scheduledTime)
+        return date.toLocaleString('default', {
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true // to show AM/PM
+        })
+    }
 
     return (
         <div id="court-container">
@@ -41,7 +53,6 @@ export const CourtDetails = ({ loggedInUser }) => {
                 </div>
             </div>
             <div id="image-matches-container">
-                {/* <img id="court-detail-image" src={placeholderCourtImg} /> */}
                 <img id="court-detail-image" src={court.image} alt={`image for ${court.name}`}/>
                 <div id="scheduled-matches">
                     <p id="match-header">Scheduled Matches</p>
@@ -54,7 +65,7 @@ export const CourtDetails = ({ loggedInUser }) => {
                                 <p>{cm.matchLeader?.firstName + " " + cm.matchLeader?.lastName}</p>
                                 <p id="vs">VS</p>
                                 <p>{cm.matchOpponent?.firstName + " " + cm.matchOpponent?.lastName}</p>
-                                <p id="match-item-time">{cm.scheduledTime}</p>
+                                <p id="match-item-time">{formatScheduledTime(cm.scheduledTime)}</p>
                             </div>
                         ))}
                     </div> : <></>}

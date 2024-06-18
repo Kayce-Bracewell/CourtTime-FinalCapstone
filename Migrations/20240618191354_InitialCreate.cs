@@ -187,7 +187,7 @@ namespace CourtTime_Capstone.Migrations
                     Address = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Image = table.Column<string>(type: "text", nullable: true),
-                    Skill = table.Column<double>(type: "double precision", nullable: false),
+                    Skill = table.Column<double>(type: "double precision", nullable: true),
                     PhoneNum = table.Column<string>(type: "text", nullable: true),
                     IdentityUserId = table.Column<string>(type: "text", nullable: false)
                 },
@@ -211,7 +211,7 @@ namespace CourtTime_Capstone.Migrations
                     MatchLeaderId = table.Column<int>(type: "integer", nullable: false),
                     MatchOpponentId = table.Column<int>(type: "integer", nullable: false),
                     CourtId = table.Column<int>(type: "integer", nullable: false),
-                    ScheduledTime = table.Column<string>(type: "text", nullable: false)
+                    ScheduledTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -244,25 +244,25 @@ namespace CourtTime_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "6ab1eebf-eba8-4aa2-b079-303451d391a0", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAELguwh5SXRZ9ldCmK3cKhkhNhamLu7EpIOjTk3cp1f9W/wAJ9LE0bW0T2O0T5nzmHQ==", null, false, "f3b85032-4eb1-49a1-bfeb-8a50f264a516", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "5c0a569b-1763-4af2-92a1-f25b02e85c64", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAEJDuR2SO46TdejO6WnxTOXOyp3IZVZKfuhVI+Rux42BUmh7qswRHm1XwHKZWNLsMPg==", null, false, "f7923540-6df2-4cea-9c0b-56d84591c8d9", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "Courts",
                 columns: new[] { "Id", "Address", "CourtSize", "Image", "Name", "Type" },
                 values: new object[,]
                 {
-                    { 1, "123 Main St, Nashville, TN", "Standard", "nashville_central.jpg", "Nashville Central Tennis Courts", "Hard" },
-                    { 2, "456 Riverside Dr, Memphis, TN", "Standard", "memphis_riverside.jpg", "Memphis Riverside Tennis Club", "Clay" },
-                    { 3, "789 Volunteer Blvd, Knoxville, TN", "Standard", "knoxville_center.jpg", "Knoxville Tennis Center", "Grass" },
-                    { 4, "1011 Valley Rd, Chattanooga, TN", "Standard", "chattanooga_valley.jpg", "Chattanooga Valley Tennis Courts", "Hard" },
-                    { 5, "1213 Academy St, Clarksville, TN", "Standard", "clarksville_academy.jpg", "Clarksville Tennis Academy", "Clay" },
-                    { 6, "1415 Oak St, Murfreesboro, TN", "Standard", "murfreesboro_club.jpg", "Murfreesboro Tennis Club", "Grass" },
-                    { 7, "1617 Main St, Franklin, TN", "Standard", "franklin_community.jpg", "Franklin Community Tennis Courts", "Hard" },
-                    { 8, "1819 Court St, Jackson, TN", "Standard", "jackson_city.jpg", "Jackson City Tennis", "Clay" },
-                    { 9, "2021 University Pkwy, Johnson City, TN", "Standard", "johnson_city.jpg", "Johnson City Tennis Courts", "Grass" },
-                    { 10, "2223 Elm St, Bartlett, TN", "Standard", "bartlett_club.jpg", "Bartlett Tennis Club", "Hard" },
-                    { 11, "2425 Lake Rd, Hendersonville, TN", "Standard", "hendersonville_heights.jpg", "Hendersonville Heights Tennis Courts", "Clay" },
-                    { 12, "2627 Germantown Rd, Germantown, TN", "Standard", "germantown_stadium.jpg", "Germantown Tennis Stadium", "Grass" }
+                    { 1, "123 Main St, Nashville, TN", "Standard", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Tennis_courts_at_Centennial_Sportsplex.jpg/1200px-Tennis_courts_at_Centennial_Sportsplex.jpg", "Nashville Central Tennis Courts", "Hard" },
+                    { 2, "456 Riverside Dr, Nashville, TN", "Standard", "https://www.wkrn.com/wp-content/uploads/sites/73/2022/08/Spring-Hill-tennis-development.jpg?w=900", "East Nashville Tennis Club", "Clay" },
+                    { 3, "789 West End Ave, Nashville, TN", "Standard", "https://www.sayvilleschools.org/cms/lib/NY02205481/Centricity/ModuleInstance/36413/large/mstc2.jpg?rnd=0.124836626986431", "West End Tennis Center", "Grass" },
+                    { 4, "1011 Belmont Blvd, Nashville, TN", "Standard", "https://images.squarespace-cdn.com/content/v1/5da5ec373a95ae6d8896a01e/1674655479911-XKCFOXJXBZH8RT4H5WXA/DJI_0587.JPG", "Belmont Tennis Courts", "Hard" },
+                    { 5, "1213 Vanderbilt Pl, Nashville, TN", "Standard", "https://lipscombsports.com/images/2020/5/26/TennisComplex1.jpg?preset=large.socialmediaimage", "Vanderbilt Tennis Academy", "Clay" },
+                    { 6, "1415 Oak St, Brentwood, TN", "Standard", "https://d2114hmso7dut1.cloudfront.net/customers/b4646402-ea8d-11ed-bec3-0614187498c1/sites/b470533e-ea8d-11ed-a9ae-0614187498c1/files/9b5c0730-eb64-11ed-9d8e-a59b9fd26edf/_thumbnails/1280.webp?t=1683305290&original_extension=png", "Brentwood Tennis Club", "Grass" },
+                    { 7, "1617 Main St, Franklin, TN", "Standard", "https://d1ja9tyo8nbkbc.cloudfront.net/50513653_S0035/S0035/S0035-R0100/RTC2637758/660c142006ad0445e3b02e70.jpg?version=1712068686&width=640", "Franklin Community Tennis Courts", "Hard" },
+                    { 8, "1819 Hillsboro Rd, Nashville, TN", "Standard", "https://www.novasports.com/wp-content/uploads/UT3-Copy-4-1024x768.jpg", "Green Hills Tennis Courts", "Clay" },
+                    { 9, "2021 Harding Pike, Nashville, TN", "Standard", "https://cdn.synthetic-turf.com/uploads/2013/11/22064524/Tennis-court11.jpg", "Belle Meade Tennis Courts", "Grass" },
+                    { 10, "2223 Lebanon Pike, Nashville, TN", "Standard", "https://assets.simpleviewinc.com/simpleview/image/upload/crm/napavalley/SilveradoResortandSpa_KT-208_34CEA051-F9D8-4657-BA66AB13B30AB737_436c29dd-fbb8-4ad4-b21be972570ea72f.jpg", "Hermitage Tennis Club", "Hard" },
+                    { 11, "2425 Lake Rd, Hendersonville, TN", "Standard", "https://www.campwidji.org/sites/campwidji/files/2020-02/tennis-yo-730.jpg", "Hendersonville Heights Tennis Courts", "Clay" },
+                    { 12, "2627 Germantown Rd, Nashville, TN", "Standard", "https://transform.octanecdn.com/width/1600/https://octanecdn.com/turftekusacom/turftekusacom_610595326.jpg", "Germantown Tennis Stadium", "Grass" }
                 });
 
             migrationBuilder.InsertData(

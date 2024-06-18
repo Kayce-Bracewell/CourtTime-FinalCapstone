@@ -25,6 +25,19 @@ export const Home = ({ loggedInUser }) => {
         return opponentName === loggedInUserName ? leaderName : opponentName;
     }
 
+    const formatScheduledTime = (scheduledTime) => {
+        if (!scheduledTime) return ""
+
+        const date = new Date(scheduledTime)
+        return date.toLocaleString('default', {
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true // to show AM/PM
+        })
+    }
+
     return (
         <div className="pseudo-body">
             {matches ? 
@@ -51,7 +64,7 @@ export const Home = ({ loggedInUser }) => {
                         </div>
                         <div className="match-item">
                             <h4>Time</h4>
-                            <p>{m.scheduledTime}</p>
+                            <p>{formatScheduledTime(m.scheduledTime)}</p>
                         </div>
                     </div>
                 ))}

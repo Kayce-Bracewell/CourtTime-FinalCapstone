@@ -12,7 +12,7 @@ namespace CourtTime.Models;
         [Required]
         public int CourtId { get; set; }
         [Required]
-        public string ScheduledTime { get; set; }
+        public DateTime ScheduledTime { get; set; }
 
         public UserProfile MatchLeader { get; set; }
         public UserProfile MatchOpponent { get; set; }

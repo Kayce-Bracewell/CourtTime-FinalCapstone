@@ -20,6 +20,11 @@ export const MatchEdit = ({ loggedInUser }) => {
     const [filteredCourts, setFilteredCourts] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
 
+    // Add state for date and time components
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [hour, setHour] = useState('');
+
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -32,6 +37,12 @@ export const MatchEdit = ({ loggedInUser }) => {
                 courtId: match.courtId,
                 scheduledTime: match.scheduledTime
             });
+
+            // Initialize date and time components from scheduledTime
+            const date = new Date(match.scheduledTime);
+            setDay(date.getUTCDate());
+            setMonth(date.getUTCMonth() + 1); // getMonth() returns 0-11
+            setHour(date.getUTCHours());
         });
         getCourts().then(setCourts);
         getAllUserProfiles().then(setUsers);
@@ -64,9 +75,22 @@ export const MatchEdit = ({ loggedInUser }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        editMatch(match).then(() => navigate(`/matches/${match.id}`));
+    
+        // Construct the scheduledTime string from the selected components
+        const year = new Date().getUTCFullYear();
+        const scheduledTimeUTC = new Date(Date.UTC(year, month - 1, day, hour)); // Create UTC date
+    
+        // Convert to ISO string for consistency with server storage
+        const scheduledTime = scheduledTimeUTC.toISOString();
+    
+        const updatedMatch = {
+            ...match,
+            scheduledTime: scheduledTime
+        };
+    
+        editMatch(updatedMatch).then(() => navigate(`/matches/${match.id}`));
     };
-
+    
     const handleCourtSearchChange = (event) => {
         setCourtSearch(event.target.value);
     };
@@ -110,7 +134,7 @@ export const MatchEdit = ({ loggedInUser }) => {
                             type="text"
                             value={userSearch}
                             onChange={handleUserSearchChange}
-                            placeholder="Search for opponent by name"
+                            placeholder="Search opponent by name"
                         />
                         <select
                             name="matchOpponentId"
@@ -127,11 +151,26 @@ export const MatchEdit = ({ loggedInUser }) => {
                     </div>
                     <div className="edit-info">
                         <h5>Time:</h5>
-                        <input
-                            name="scheduledTime"
-                            value={match.scheduledTime}
-                            onChange={handleChange}
-                        />
+                        <div className="time-selectors">
+                            <select value={month} onChange={(e) => setMonth(e.target.value)}>
+                                <option value="">Month</option>
+                                {[...Array(12).keys()].map(m => (
+                                    <option key={m + 1} value={m + 1}>{new Date(0, m).toLocaleString('default', { month: 'long' })}</option>
+                                ))}
+                            </select>
+                            <select value={day} onChange={(e) => setDay(e.target.value)}>
+                                <option value="">Day</option>
+                                {[...Array(31).keys()].map(d => (
+                                    <option key={d + 1} value={d + 1}>{d + 1}</option>
+                                ))}
+                            </select>
+                            <select value={hour} onChange={(e) => setHour(e.target.value)}>
+                                <option value="">Hour</option>
+                                {[...Array(24).keys()].map(h => (
+                                    <option key={h} value={h}>{h}:00</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                     <button id="submit-edit-btn" type="submit">Save Changes</button>
                 </form>

@@ -23,6 +23,22 @@ export const MatchDetails = ({ loggedInUser }) => {
 
     const displayInfo = getDisplayInfo(match);
 
+    const formatScheduledTime = (scheduledTime) => {
+        if (!scheduledTime) return "";
+    
+        const date = new Date(scheduledTime);
+        // Adjusting the date to local time zone
+        const localDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        return localDate.toLocaleString('default', {
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true // to show AM/PM
+        });
+    };
+    
+
     return (
         <div id="match-container">
             <h2>Match Details</h2>
@@ -70,7 +86,7 @@ export const MatchDetails = ({ loggedInUser }) => {
                     <button onClick={() => {
                         navigate("edit")
                     }} id="edit-btn">Edit Match</button>
-                    <h4>{"Scheduled Time: " + match.scheduledTime}</h4>
+                    <h4>{"Scheduled Time: " + formatScheduledTime(match.scheduledTime)}</h4>
                     <button onClick={() => {
                         navigate("delete")
                     }} id="delete-btn">Delete Match</button>

@@ -3,6 +3,7 @@ using CourtTime.Models;
 using CourtTime.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace CourtTime.Controllers;
 
@@ -118,9 +119,9 @@ public class MatchController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateMatch(MatchDTO matchDTO)
+    public IActionResult CreateMatch(MatchDTO matchDTO)
     {
-        var match = new Match
+        Match match = new Match
         {
             MatchLeaderId = matchDTO.MatchLeaderId,
             MatchOpponentId = matchDTO.MatchOpponentId,
@@ -129,10 +130,11 @@ public class MatchController : ControllerBase
         };
 
         _dbContext.Matches.Add(match);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
 
         return CreatedAtAction(nameof(GetMatch), new { id = match.Id }, match);
     }
+
 
     [HttpDelete("{id}")]
     public IActionResult DeleteMatch(int id)
@@ -156,19 +158,29 @@ public class MatchController : ControllerBase
     {
         Match match = _dbContext.Matches.FirstOrDefault(m => m.Id == matchEdit.Id);
 
-        if(match == null)
+        if (match == null)
         {
             return NotFound();
         }
 
         match.MatchOpponentId = matchEdit.MatchOpponentId;
         match.CourtId = matchEdit.CourtId;
-        match.ScheduledTime = matchEdit.ScheduledTime;
+
+        // Parse the UTC time correctly
+        if (DateTime.TryParse(matchEdit.ScheduledTime, null, DateTimeStyles.RoundtripKind, out DateTime parsedDate))
+        {
+            match.ScheduledTime = parsedDate.ToUniversalTime();
+        }
+        else
+        {
+            return BadRequest("Invalid date format for ScheduledTime");
+        }
 
         _dbContext.SaveChanges();
 
         return NoContent();
     }
+
 
     [HttpGet("court/{id}")]
     public IActionResult CourtMatches(int id)

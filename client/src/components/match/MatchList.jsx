@@ -19,6 +19,19 @@ export const MatchList = ({ loggedInUser }) => {
         return opponentName === loggedInUserName ? leaderName : opponentName;
     };
 
+    const formatScheduledTime = (scheduledTime) => {
+        if (!scheduledTime) return ""
+
+        const date = new Date(scheduledTime)
+        return date.toLocaleString('default', {
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true // to show AM/PM
+        })
+    }
+
     return (
         <div id="main-match-container">
             <h1>Scheduled Matches</h1>
@@ -34,7 +47,7 @@ export const MatchList = ({ loggedInUser }) => {
                     </div>
                     <div className="match-item">
                         <h4>Time</h4>
-                        <p>{m.scheduledTime}</p>
+                        <p>{formatScheduledTime(m.scheduledTime)}</p>
                     </div>
                     <div className="match-item match-details">
                         <button id="details-btn" onClick={() => {
