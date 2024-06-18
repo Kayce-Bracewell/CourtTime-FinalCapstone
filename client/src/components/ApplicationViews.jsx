@@ -37,7 +37,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             <Route index element={<MatchDetails loggedInUser={loggedInUser}/> } />
           </Route>
           <Route path=":id/delete" element={<MatchDelete />} />
-          <Route path=":id/edit" element={<MatchEdit />} />
+          <Route path=":id/edit" element={<MatchEdit loggedInUser={loggedInUser}/>} />
         </Route>
         <Route path="profile" element={<ProfileView setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser}/>}/>
         <Route
