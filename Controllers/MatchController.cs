@@ -23,6 +23,7 @@ public class MatchController : ControllerBase
         Match match = _dbContext.Matches
             .Include(m => m.Court)
             .Include(m => m.MatchOpponent)
+            .Include(m => m.MatchLeader)
             .FirstOrDefault(m => m.Id == id);
 
         if (match == null)
@@ -54,6 +55,15 @@ public class MatchController : ControllerBase
                 Email = match.MatchOpponent.Email,
                 Skill = match.MatchOpponent.Skill,
                 PhoneNum = match.MatchOpponent.PhoneNum
+            },
+            MatchLeader = new UserProfileDTO
+            {
+                Id = match.MatchLeader.Id,
+                FirstName = match.MatchLeader.FirstName,
+                LastName = match.MatchLeader.LastName,
+                Email = match.MatchLeader.Email,
+                Skill = match.MatchLeader.Skill,
+                PhoneNum = match.MatchLeader.PhoneNum
             }
         };
 

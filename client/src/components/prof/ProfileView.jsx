@@ -5,7 +5,7 @@ import { updateUserProfile } from "../../managers/userManager";
 import { deleteUser, tryGetLoggedInUser } from "../../managers/authManager";
 import { useNavigate } from "react-router-dom";
 
-export const ProfileView = ({ loggedInUser }) => {
+export const ProfileView = ({ loggedInUser, setLoggedInUser }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedProfile, setEditedProfile] = useState({
         firstName: loggedInUser.firstName,
@@ -16,7 +16,7 @@ export const ProfileView = ({ loggedInUser }) => {
         phoneNum: loggedInUser.phoneNum
     });
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -28,15 +28,20 @@ export const ProfileView = ({ loggedInUser }) => {
     };
 
     const handleSave = () => {
-        updateUserProfile(loggedInUser.id, editedProfile).then(() => setIsEditing(false))
-        tryGetLoggedInUser().then((user) => setLoggedInUser(user))
-        console.log("Saving profile...", editedProfile);
+        updateUserProfile(loggedInUser.id, editedProfile)
+            .then(() => tryGetLoggedInUser())
+            .then((user) => {
+                setLoggedInUser(user);
+                setIsEditing(false);
+            })
+            .catch((error) => console.error("Error updating profile:", error));
     };
 
     const handleDelete = (userId) => {
         deleteUser(userId)
-        navigate("/login")
-    }
+            .then(() => navigate("/login"))
+            .catch((error) => console.error("Error deleting profile:", error));
+    };
 
     return (
         <div id="profile-container">
@@ -122,8 +127,7 @@ export const ProfileView = ({ loggedInUser }) => {
             {isEditing ? (
                 <div id="profile-btn-container">
                     <button id="edit-profile-btn" onClick={handleSave}>Save Edit</button>
-                    <button id="delete-profile-btn" onClick={() => {
-                        handleDelete(loggedInUser.identityUserId)}}>Delete Profile</button>
+                    <button id="delete-profile-btn" onClick={() => handleDelete(loggedInUser.identityUserId)}>Delete Profile</button>
                 </div>
             ) : (
                 <button id="edit-profile-btn" onClick={handleEditToggle}>Edit Profile</button>
