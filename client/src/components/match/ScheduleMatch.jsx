@@ -28,10 +28,11 @@ export const ScheduleMatch = ({ loggedInUser }) => {
 
     useEffect(() => {
         const filtered = userProfiles.filter(user =>
+            user.id !== loggedInUser.id &&
             `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchInput.toLowerCase())
         );
         setFilteredUserProfiles(filtered);
-    }, [searchInput, userProfiles]);
+    }, [searchInput, userProfiles, loggedInUser.id]);
 
     const handleScheduleMatch = () => {
         const { day, month, year, hour } = scheduledDate;
@@ -50,7 +51,7 @@ export const ScheduleMatch = ({ loggedInUser }) => {
         };
     
         CreateMatch(matchObj).then((res) => navigate(`/matches/${res.id}`));
-    };    
+    };
 
     // Function to generate array of options for days in a month
     const generateDayOptions = () => {

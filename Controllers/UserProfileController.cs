@@ -35,6 +35,7 @@ namespace CourtTime.Controllers
             userProfile.Address = editedProfile.Address ?? userProfile.Address;
             userProfile.Email = editedProfile.Email ?? userProfile.Email;
             userProfile.PhoneNum = editedProfile.PhoneNum ?? userProfile.PhoneNum;
+            userProfile.Skill = editedProfile.Skill ?? userProfile.Skill;
 
             _dbContext.SaveChanges();
 
