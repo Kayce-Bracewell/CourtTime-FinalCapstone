@@ -13,7 +13,8 @@ export const ProfileView = ({ loggedInUser, setLoggedInUser }) => {
         userName: loggedInUser.userName,
         address: loggedInUser.address,
         email: loggedInUser.email,
-        phoneNum: loggedInUser.phoneNum
+        phoneNum: loggedInUser.phoneNum,
+        skill: loggedInUser.skill
     });
 
     const navigate = useNavigate();
@@ -121,6 +122,19 @@ export const ProfileView = ({ loggedInUser, setLoggedInUser }) => {
                         />
                     ) : (
                         <h4>{loggedInUser.phoneNum}</h4>
+                    )}
+                </div>
+                <div className="profile-subsection">
+                    <p className="profile-prepend">Skill:</p>
+                    {isEditing ? (
+                        <input 
+                            type="text"
+                            name="skill"
+                            value={editedProfile.skill || ""}
+                            onChange={handleChange}
+                        />
+                    ) : (
+                        <h4>{loggedInUser.skill} / 5</h4>
                     )}
                 </div>
             </div>
