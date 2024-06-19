@@ -26,17 +26,19 @@ export const Home = ({ loggedInUser }) => {
     }
 
     const formatScheduledTime = (scheduledTime) => {
-        if (!scheduledTime) return ""
-
-        const date = new Date(scheduledTime)
-        return date.toLocaleString('default', {
+        if (!scheduledTime) return "";
+    
+        const date = new Date(scheduledTime);
+        return date.toLocaleString('en-US', {
+            timeZone: 'UTC', // Adjust according to your stored timezone
             month: 'long',
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',
             hour12: true // to show AM/PM
-        })
+        });
     }
+    
 
     return (
         <div className="pseudo-body">

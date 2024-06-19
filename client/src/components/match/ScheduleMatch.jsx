@@ -36,11 +36,11 @@ export const ScheduleMatch = ({ loggedInUser }) => {
     const handleScheduleMatch = () => {
         const { day, month, year, hour } = scheduledDate;
     
-        // Assuming month is already in "June" format, convert to month index (0-indexed in JavaScript)
-        const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth() + 1; // +1 because months are zero-indexed
+        // Convert month name to month index
+        const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth() + 1;
     
-        // Construct ISO 8601 formatted datetime string
-        const isoFormattedDateTime = `${year}-${monthIndex.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T${hour}:00:00.000Z`;
+        // Construct ISO 8601 formatted datetime string with zero-padded values
+        const isoFormattedDateTime = `${year}-${monthIndex.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T${hour.toString().padStart(2, '0')}:00:00.000Z`;
     
         const matchObj = {
             MatchLeaderId: loggedInUser.id,
@@ -50,8 +50,7 @@ export const ScheduleMatch = ({ loggedInUser }) => {
         };
     
         CreateMatch(matchObj).then((res) => navigate(`/matches/${res.id}`));
-    };
-    
+    };    
 
     // Function to generate array of options for days in a month
     const generateDayOptions = () => {
