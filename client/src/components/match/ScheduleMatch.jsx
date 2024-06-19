@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCourtById } from "../../managers/courtManager";
 import { CreateMatch } from "../../managers/matchManager";
 import { getAllUserProfiles } from "../../managers/userManager";
-import "./ScheduleMatch.css"
+import "./ScheduleMatch.css";
 
 export const ScheduleMatch = ({ loggedInUser }) => {
     const [opponentId, setOpponentId] = useState("");
-    const [scheduledTime, setScheduledTime] = useState("");
+    const [scheduledDate, setScheduledDate] = useState({
+        day: "",
+        month: "",
+        hour: "",
+        year: new Date().getFullYear().toString() // Assuming current year
+    });
     const [court, setCourt] = useState({});
     const [userProfiles, setUserProfiles] = useState([]);
     const [searchInput, setSearchInput] = useState("");
@@ -29,15 +34,52 @@ export const ScheduleMatch = ({ loggedInUser }) => {
     }, [searchInput, userProfiles]);
 
     const handleScheduleMatch = () => {
+        const { day, month, year, hour } = scheduledDate;
+    
+        // Assuming month is already in "June" format, convert to month index (0-indexed in JavaScript)
+        const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth() + 1; // +1 because months are zero-indexed
+    
+        // Construct ISO 8601 formatted datetime string
+        const isoFormattedDateTime = `${year}-${monthIndex.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T${hour}:00:00.000Z`;
+    
         const matchObj = {
             MatchLeaderId: loggedInUser.id,
             MatchOpponentId: parseInt(opponentId),
             CourtId: parseInt(id),
-            ScheduledTime: scheduledTime
+            ScheduledTime: isoFormattedDateTime
         };
-
+    
         CreateMatch(matchObj).then((res) => navigate(`/matches/${res.id}`));
     };
+    
+
+    // Function to generate array of options for days in a month
+    const generateDayOptions = () => {
+        const daysInMonth = 31; // Assuming maximum 31 days
+        return Array.from({ length: daysInMonth }, (_, index) => index + 1);
+    };
+
+    // Array of month names for dropdown
+    const monthOptions = [
+        { value: "January", label: "January" },
+        { value: "February", label: "February" },
+        { value: "March", label: "March" },
+        { value: "April", label: "April" },
+        { value: "May", label: "May" },
+        { value: "June", label: "June" },
+        { value: "July", label: "July" },
+        { value: "August", label: "August" },
+        { value: "September", label: "September" },
+        { value: "October", label: "October" },
+        { value: "November", label: "November" },
+        { value: "December", label: "December" }
+    ];
+
+    // Array of hour options (assuming 24-hour format)
+    const hourOptions = Array.from({ length: 24 }, (_, index) => ({
+        value: index.toString(),
+        label: index < 10 ? `0${index}:00` : `${index}:00`
+    }));
 
     return (
         <div id="court-container">
@@ -66,15 +108,53 @@ export const ScheduleMatch = ({ loggedInUser }) => {
                         ))}
                     </select>
                 </div>
-                <div id="last-schedule-input" className="schedule-inputs">
-                    <label className="info-label">Enter Time:</label>
-                    <input
+                <div className="schedule-inputs">
+                    <label className="info-label">Select Day:</label>
+                    <select
                         className="input-black"
-                        onChange={(e) => setScheduledTime(e.target.value)}
-                    />
+                        value={scheduledDate.day}
+                        onChange={(e) => setScheduledDate({ ...scheduledDate, day: e.target.value })}
+                    >
+                        <option value="">Select a day</option>
+                        {generateDayOptions().map(day => (
+                            <option key={day} value={day.toString()}>
+                                {day}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="schedule-inputs">
+                    <label className="info-label">Select Month:</label>
+                    <select
+                        className="input-black"
+                        value={scheduledDate.month}
+                        onChange={(e) => setScheduledDate({ ...scheduledDate, month: e.target.value })}
+                    >
+                        <option value="">Select a month</option>
+                        {monthOptions.map(month => (
+                            <option key={month.value} value={month.value}>
+                                {month.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="schedule-inputs">
+                    <label className="info-label">Select Hour:</label>
+                    <select
+                        className="input-black"
+                        value={scheduledDate.hour}
+                        onChange={(e) => setScheduledDate({ ...scheduledDate, hour: e.target.value })}
+                    >
+                        <option value="">Select an hour</option>
+                        {hourOptions.map(hour => (
+                            <option key={hour.value} value={hour.value}>
+                                {hour.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
-            <button onClick={handleScheduleMatch} id="create-match-btn">Create Match</button> 
+            <button onClick={handleScheduleMatch} id="create-match-btn">Create Match</button>
         </div>
     );
 };

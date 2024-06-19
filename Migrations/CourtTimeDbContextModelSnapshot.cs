@@ -182,9 +182,8 @@ namespace CourtTime_Capstone.Migrations
                     b.Property<int>("MatchOpponentId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ScheduledTime")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime>("ScheduledTime")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -381,13 +380,13 @@ namespace CourtTime_Capstone.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d21b5d29-0488-4023-af8f-17b9cf9183e6",
+                            ConcurrencyStamp = "5c0a569b-1763-4af2-92a1-f25b02e85c64",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEM7jthdc8FkE0/GUvPHrMOvJewGO51+fZhnBoK3Za8M9mOII8I2iQY2IfRqbV2+eqg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJDuR2SO46TdejO6WnxTOXOyp3IZVZKfuhVI+Rux42BUmh7qswRHm1XwHKZWNLsMPg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b05049f7-00cc-413a-b154-ea47527e2110",
+                            SecurityStamp = "f7923540-6df2-4cea-9c0b-56d84591c8d9",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });
